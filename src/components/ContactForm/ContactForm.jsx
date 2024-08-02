@@ -23,7 +23,6 @@ const ContactForm = ({ addNewContact}) => {
     id: "",
   };
   const handleSubmit = (data) => {
-    console.log(data);
     addNewContact(data, (data.id = nanoid()));
   };
   return (
