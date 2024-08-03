@@ -3,15 +3,17 @@ import React from "react";
 import { nanoid } from "nanoid";
 import * as Yup from "yup";
 import s from "./ContactForm.module.css";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contacts/contactsSlice";
 
-const ContactForm = ({ addNewContact}) => {
+const ContactForm = () => {
   const schema = Yup.object({
     name: Yup.string()
       .required("This field is required")
       .min(3, "add more")
       .max(50, "too much chars"),
 
-      number: Yup.string('please add only numbers')
+    number: Yup.string("please add only numbers")
       .required("This field is required")
       .min(3, "add more")
       .max(50, "too much chars"),
@@ -22,17 +24,26 @@ const ContactForm = ({ addNewContact}) => {
     number: "",
     id: "",
   };
-  const handleSubmit = (data) => {
-    addNewContact(data, (data.id = nanoid()));
+
+  const dispatch = useDispatch();
+
+  const handleSubmit = (data, options) => {
+    const newItem = {
+      name: data.name,
+      number: data.number,
+      id: nanoid(),
+    };
+    dispatch(addContact(newItem));
+    options.resetForm();
   };
   return (
-    <div >
+    <div>
       <Formik
         initialValues={initialValues}
         onSubmit={handleSubmit}
         validationSchema={schema}
       >
-        <Form className={s.wrapper}> 
+        <Form className={s.wrapper}>
           <label className={s.label}>
             <span>Name</span>
             <Field name="name" />

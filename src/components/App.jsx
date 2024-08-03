@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import ContactForm from "./ContactForm/ContactForm";
 import ContactList from "./ContactList/ContactList";
 import SearchBox from "./SearchBox/SearchBox";
@@ -12,28 +12,28 @@ const App = () => {
     { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
   ]);
 
-  const [filter, setFilter] = useState("");
+  // const [filter, setFilter] = useState("");
 
-  const addNewContact = (newContact) => {
-    setContactList((prev) => {
-      return [...prev, newContact];
-    });
-  };
+  // const addNewContact = (newContact) => {
+  //   setContactList((prev) => {
+  //     return [...prev, newContact];
+  //   });
+  // };
 
-  const removeContact = (contactId) => {
-    setContactList((prev) => prev.filter((item) => item.id !== contactId));
-  };
+  // const removeContact = (contactId) => {
+  //   setContactList((prev) => prev.filter((item) => item.id !== contactId));
+  // };
 
-  const contacts = contactList.filter((item) =>
-    item.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  // const contacts = contactList.filter((item) =>
+  //   item.name.toLowerCase().includes(filter.toLowerCase())
+  // );
 
   return (
     <div className={styles.wrapper}>
       <h1>Phonebook</h1>
-      <ContactForm addNewContact={addNewContact} />
-      <SearchBox value={filter} onFilter={setFilter} />
-      <ContactList  onRemove={removeContact} />
+      <ContactForm />
+      <SearchBox />
+      <ContactList />
     </div>
   );
 };
